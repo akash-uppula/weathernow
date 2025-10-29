@@ -61,10 +61,23 @@ const WeatherNow = () => {
     45: "🌫️ Fog",
     48: "🌫️ Depositing rime fog",
     51: "🌦️ Light drizzle",
-    61: "🌧️ Rain",
-    71: "🌨️ Snow",
+    53: "🌧️ Moderate drizzle",
+    55: "🌧️ Heavy drizzle",
+    61: "🌧️ Light rain",
+    63: "🌧️ Moderate rain",
+    65: "🌧️🌧️ Heavy rain",
+    66: "🌨️❄️ Light freezing rain",
+    67: "🌨️❄️💧 Heavy freezing rain",
+    71: "🌨️ Light snow",
+    73: "🌨️ Moderate snow",
+    75: "🌨️❄️❄️ Heavy snow",
+    77: "🌨️ Snow grains",
     80: "🌦️ Rain showers",
+    81: "🌦️ Moderate rain showers",
+    82: "🌧️💧 Heavy rain showers",
     95: "⛈️ Thunderstorm",
+    96: "⛈️🌨️ Thunderstorm with hail",
+    99: "⛈️🌨️ Heavy thunderstorm with hail",
   };
 
   return (
@@ -94,7 +107,9 @@ const WeatherNow = () => {
           </button>
         </div>
 
-        {loading && <p className="text-lg animate-pulse">Fetching weather data...</p>}
+        {loading && (
+          <p className="text-lg animate-pulse">Fetching weather data...</p>
+        )}
         {error && <p className="text-red-300 font-medium">{error}</p>}
 
         {weather && (
@@ -111,18 +126,28 @@ const WeatherNow = () => {
               {weatherIcons[weather.weathercode] || "🌍 Weather Info"}
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-4 mt-4 text-lg">
-              <p className="bg-white/10 rounded-lg px-4 py-2 shadow-md">🌡️ {weather.temperature}°C</p>
-              <p className="bg-white/10 rounded-lg px-4 py-2 shadow-md">💨 {weather.windspeed} km/h</p>
+              <p className="bg-white/10 rounded-lg px-4 py-2 shadow-md">
+                🌡️ {weather.temperature}°C
+              </p>
+              <p className="bg-white/10 rounded-lg px-4 py-2 shadow-md">
+                💨 {weather.windspeed} km/h
+              </p>
             </div>
             <p className="text-sm opacity-80 mt-4">
-              ⏰ {new Date(`${weather.time}Z`).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: true })}
+              ⏰{" "}
+              {new Date(`${weather.time}Z`).toLocaleTimeString([], {
+                hour: "2-digit",
+                minute: "2-digit",
+                hour12: true,
+              })}
             </p>
           </motion.div>
         )}
       </motion.div>
 
       <footer className="mt-8 text-sm opacity-80 tracking-wide">
-        Built for <span className="font-semibold">Jamie</span> — Outdoor Enthusiast 🌍
+        Built for <span className="font-semibold">Jamie</span> — Outdoor
+        Enthusiast 🌍
       </footer>
     </div>
   );
